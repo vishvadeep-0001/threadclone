@@ -3,6 +3,7 @@ import {FaSearch} from "react-icons/fa"
 import React from "react";
 
 const SearchInput = () => {
+  const _700 = useMediaQuery("(min-width: 700px)");
   return (
     <>
       <TextField

@@ -23,3 +23,10 @@
 .file-input{
     display: none;
 }
+.link{
+    text-decoration: none;
+    color: black;
+}
+#url-img{
+    margin: 0 0 10px;
+}

@@ -1,7 +1,9 @@
 import { Button, Stack, Typography } from "@mui/material";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Error = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Stack>
@@ -27,8 +29,9 @@ const Error = () => {
               color: "white",
               borderRadius: "4px",
               py: "5px",
-              px: "15px"
+              px: "15px",
             }}
+            onClick={() => navigate(-1)}
           >
             Go Back !
           </Button>

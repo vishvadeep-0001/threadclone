@@ -7,3 +7,19 @@
     cursor: pointer;
     color: blue;
 }
+.image-icon{
+    cursor: pointer;
+}
+.text1{
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    position: inherit;
+    left: -10px;
+    color: gray;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+.file-input{
+    display: none;
+}

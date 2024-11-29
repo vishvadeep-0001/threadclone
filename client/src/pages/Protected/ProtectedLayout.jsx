@@ -2,9 +2,11 @@ import { Stack, useMediaQuery } from "@mui/material";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../../components/common/Header";
+import Addpost from "../../components/modals/Addpost";
+import EditProfile from "../../components/modals/EditProfile";
 
 const ProtectedLayout = () => {
-  const _700 = useMediaQuery("(min-width: 700px)")
+  const _700 = useMediaQuery("(min-width: 700px)");
   return (
     <Stack
       flexDirection={"column"}
@@ -14,7 +16,10 @@ const ProtectedLayout = () => {
       overflow={"hidden"}
     >
       <Header />
-      <Outlet/>
+      {/* <Addpost /> */}
+      {/* <EditProfile/> */}
+
+      <Outlet />
     </Stack>
   );
 };

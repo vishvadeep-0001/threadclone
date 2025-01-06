@@ -2,6 +2,7 @@ const express = require("express");
 const { signin, login, userDetails, followUser, updateProfile, searchUser, logout, myInfo } = require("./controllers/user-controller");
 const auth = require("./middleware/auth");
 const { addPost, allPost, deletePost, likePost, repost, singlePost } = require("./controllers/post-controller");
+const { addComment } = require("./controllers/comment-controller");
 
 const router = express.Router();
 
@@ -27,6 +28,6 @@ router.put("/repost/:id", auth, repost);
 router.get("/post/:id", auth, singlePost);
 
 // Comment --- 
-
+router.post("/comment/:id", auth, addComment)
 
 module.exports = router;

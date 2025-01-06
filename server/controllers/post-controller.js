@@ -3,7 +3,7 @@ const Post = require("../models/post-model");
 const Comment = require("../models/comment-model");
 const cloudinary = require("../config/cloudinary");
 const formidable = require("formidable");
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 
 exports.addPost = async (req, res) => {
   try {
@@ -172,7 +172,7 @@ exports.repost = async (req, res) => {
 
     const newId = new mongoose.Types.ObjectId(id);
     if (req.user.reposts.includes(newId)) {
-      return res.status(400).json({ msg: "This post is laready reposted !" });
+      return res.status(400).json({ msg: "This post is already reposted !" });
     }
     await User.findByIdAndUpdate(
       req.user._id,
@@ -185,5 +185,33 @@ exports.repost = async (req, res) => {
     res.status(201).json({ msg: "Reposted !" });
   } catch (err) {
     res.status(400).json({ msg: "Error in repost !", err: err.message });
+  }
+};
+
+exports.singlePost = async (req, res) => {
+  try {
+    const { id } = req.params;
+    if (!id) {
+      return res.status(400).json({ msg: "Id is required !" });
+    }
+
+    const post = await Post.findById(id)
+      .populate({
+        path: "admin",
+        select: "-password",
+      })
+      .populate({
+        path: "likes",
+        select: "-password",
+      })
+      .populate({
+        path: "comments",
+        populate: {
+          path: "admin",
+        },
+      });
+    res.status(200).json({ msg: "Post Fetched !", post });
+  } catch (err) {
+    res.status(400).json({ msg: "Error in single Post !", err: err.message });
   }
 };

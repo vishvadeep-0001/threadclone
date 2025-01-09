@@ -1,12 +1,27 @@
-import { Avatar, Button, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { addPostModal } from "../../redux/slice";
 
 const Input = () => {
   const _700 = useMediaQuery("(min-width : 700px)");
+
+  const dispatch = useDispatch();
+
+  const handleAddPost = () => {
+    dispatch(addPostModal(true));
+  };
+
   return (
     <>
-      {
-        _700 ? (<Stack
+      {_700 ? (
+        <Stack
           flexDirection={"row"}
           alignItems={"center"}
           width={"70%"}
@@ -16,6 +31,7 @@ const Input = () => {
           borderBottom={"2px solid gray"}
           my={5}
           mx={"auto"}
+          onClick={handleAddPost}
         >
           <Stack flexDirection={"row"} alignItems={"center"} gap={2}>
             <Avatar src="" alt="AJ" />
@@ -30,10 +46,12 @@ const Input = () => {
                 bgcolor: "black",
                 cursor: "pointer",
               },
-            }} 
-          >Post</Button>
-        </Stack>) : null
-      }
+            }}
+          >
+            Post
+          </Button>
+        </Stack>
+      ) : null}
     </>
   );
 };

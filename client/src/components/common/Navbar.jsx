@@ -7,10 +7,19 @@ import { CiHeart } from "react-icons/ci";
 import { RxAvatar } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { addPostModal } from "../../redux/slice";
 
 const Navbar = () => {
 
   const _300 = useMediaQuery("(min-width : 300px)");
+
+  const dispatch = useDispatch();
+
+  const handleAddPost = ()=>{
+    dispatch(addPostModal(true))
+  }
+
   return (
     <>
       <Stack
@@ -31,7 +40,8 @@ const Navbar = () => {
           <IoIosSearch size={_300 ? 32 : 24} />
         </Link>
 
-        <TbEdit size={_300 ? 32 : 24} className="image-icon" color="black"/>
+        <TbEdit size={_300 ? 32 : 24} className="image-icon" color="black"
+        onClick={handleAddPost}/>
         <CiHeart size={_300 ? 32 : 24} color="black" />
         <Link to={"/profile/threads/1"} className="link" color="black">
           <RxAvatar size={_300 ? 32 : 24} />

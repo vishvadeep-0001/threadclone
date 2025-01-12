@@ -1,8 +1,10 @@
 import { InputAdornment, TextField } from "@mui/material";
 import {FaSearch} from "react-icons/fa"
 import React from "react";
+import {useSelector} from "react-redux";
 
 const SearchInput = () => {
+  const { darkMode } = useSelector((state) => state.service);
   const _700 = useMediaQuery("(min-width: 700px)");
   return (
     <>
@@ -17,7 +19,7 @@ const SearchInput = () => {
           my: 5,
           mx: "auto",
           "& .MuiOutlinedInput-root": {
-            color: "black",
+            color: darkMode? "whitesmoke" : "black",
             "& fieldset":{
               border: "none"
             }
@@ -26,7 +28,7 @@ const SearchInput = () => {
         placeholder="Search User ...."
         slotProps={{
           startAdornment: (
-            <InputAdornment position="start" sx={{color: "black"}}>
+            <InputAdornment position="start" sx={{color: darkMode ? "whitesmoke": "black"}}>
               <FaSearch/>
             </InputAdornment>
           )

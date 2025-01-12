@@ -2,9 +2,20 @@ import { Grid2, Stack, useMediaQuery } from "@mui/material";
 import React from "react";
 import Navbar from "./Navbar";
 import { IoMenu } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleMainMenu } from "../../redux/slice";
 
 const Header = () => {
+  const { darkMode } = useSelector((state) => state.service);
+
   const _700 = useMediaQuery("(min-width : 700px)");
+
+  const dispatch = useDispatch();
+
+  const handleOpenMenu = (e) => {
+    dispatch(toggleMainMenu(e.currentTarget));
+  };
+
   return (
     <>
       {_700 ? (
@@ -17,22 +28,36 @@ const Header = () => {
           top={0}
           py={1}
         >
-          <img
-            src="/Threads-logo-black-bg.webp"
-            alt="Logo"
-            height={40}
-            width={40}
-          />
+          {darkMode ? (
+            <img
+              src="/Threads-logo-black-bg.webp"
+              alt="Logo"
+              height={40}
+              width={50}
+            />
+          ) : (
+            <img
+              src="/Threads-logo-white-bg.png"
+              alt="Logo"
+              height={40}
+              width={35}
+            />
+          )}
           <Stack
             justifyContent={"center"}
             width={"550px"}
-            bgcolor={"aliceblue"}
+            bgcolor={darkMode ? "" : "aliceblue"}
             zIndex={2}
             height={96}
           >
             <Navbar />
           </Stack>
-          <IoMenu size={36} className="image-icon" color="gray" />
+          <IoMenu
+            size={36}
+            className="image-icon"
+            color="gray"
+            onClick={handleOpenMenu}
+          />
         </Stack>
       ) : (
         <>
@@ -41,7 +66,7 @@ const Header = () => {
             bottom={0}
             justifyContent={"center"}
             width={"100%"}
-            height={40}
+            height={52}
             p={1}
             bgcolor={"aliceblue"}
             zIndex={2}

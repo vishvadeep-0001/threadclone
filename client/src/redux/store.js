@@ -5,4 +5,9 @@ export default configureStore({
   reducer: {
     service: serviceReducer,
   },
+  // middleware: (getDefaultMiddleware)=>{
+  //   getDefaultMiddleware({
+  //     serializableCheck: false
+  //   }).concat(serviceApi.middleware)
+  // }
 });

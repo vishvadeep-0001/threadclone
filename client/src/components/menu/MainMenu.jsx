@@ -1,18 +1,31 @@
-import React from "react";
 import { Menu, MenuItem } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { toggleColorMode, toggleMainMenu } from "../../redux/slice";
 
 const MainMenu = () => {
-  const handleClose = () => {};
+  const { anchorE1 } = useSelector((state) => state.service);
+
+  const dispatch = useDispatch();
+  
+
+  const handleClose = () => {
+    dispatch(toggleMainMenu(null));
+  };
+
+  const handleToggleTheme = () => {
+    handleClose();
+    dispatch(toggleColorMode());
+  };
 
   const handleLogout = () => {};
 
-  const handleToggleTheme = () => {};
+  
   return (
     <>
       <Menu
-        anchorEl={""}
-        open={true}
+        anchorEl={anchorE1}
+        open={anchorE1 !== null ? true:false}
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}

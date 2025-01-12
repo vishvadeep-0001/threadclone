@@ -1,10 +1,25 @@
-import { Avatar, Menu, MenuItem, Stack, Typography, useMediaQuery } from "@mui/material";
-import React from "react";
+import {
+  Avatar,
+  Menu,
+  MenuItem,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import React, { useState } from "react";
 import { IoIosMore } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const Comments = () => {
+  const { darkMode } = useSelector((state) => state.service);
   const _700 = useMediaQuery("(min-width : 700px)");
-  const handleDeleteComment=()=>{}
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const handleClose = ()=>{
+    setAnchorEl(null)
+  }
+
+  const handleDeleteComment = () => {};
   return (
     <>
       <Stack
@@ -31,16 +46,19 @@ const Comments = () => {
           flexDirection={"row"}
           gap={1}
           alignItems={"center"}
-          color={"GrayText"}
+          color={darkMode ? "white" : "GrayText"}
           fontSize={"0.9rem"}
         >
           <p>24min</p>
-          <IoIosMore size={_700 ? 28 : 20} />
+          <IoIosMore
+            size={_700 ? 28 : 20}
+            onClick={(e) => anchorEl(e.currentTarget)}
+          />
         </Stack>
       </Stack>
       <Menu
-        anchorEl={""}
-        open={true}
+        anchorEl={anchorEl}
+        open={anchorEl !==null ? true: false}
         onClose={handleClose}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
